@@ -1,5 +1,6 @@
-import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+
+import '../../bootstrap/helpers.dart';
 
 class AuthProvider implements NyProvider {
   @override

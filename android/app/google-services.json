@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "919821735283",
+    "project_id": "pelayanan-syukur-gpm",
+    "storage_bucket": "pelayanan-syukur-gpm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919821735283:android:cea0979a1f2ffe1332e106",
+        "android_client_info": {
+          "package_name": "com.wentox.pelayanansyukurgpm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919821735283-klcf2drbkpe26q4i4d7dlmqg0e56tefl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf-qD0NRGhoji8jnxXABaAqsT0XXCTrDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919821735283-klcf2drbkpe26q4i4d7dlmqg0e56tefl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

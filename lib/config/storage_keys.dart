@@ -16,4 +16,5 @@ class StorageKey {
   static String authUser = getEnv('AUTH_USER_KEY', defaultValue: 'AUTH_USER');
 
   /// Add your storage keys here...
+  
 }

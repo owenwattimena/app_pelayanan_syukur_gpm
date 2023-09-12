@@ -1,5 +1,6 @@
-import 'package:flutter_app/config/storage_keys.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+
+import '../../../../config/storage_keys.dart';
 
 class BearerAuthInterceptor extends Interceptor {
   @override

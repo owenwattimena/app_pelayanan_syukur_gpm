@@ -1,16 +1,15 @@
+import 'package:com.wentox.pelayanansyukurgpm/bootstrap/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bootstrap/extensions.dart';
-import 'package:flutter_app/resources/widgets/logo_widget.dart';
+import 'package:get/get.dart';
+import '../widgets/jadwal_widget.dart';
 import '/app/controllers/home_controller.dart';
 import '/bootstrap/helpers.dart';
-import '/resources/widgets/safearea_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:nylo_framework/theme/helper/ny_theme.dart';
+
+import 'kelahiran_page.dart';
+import 'pernikahan_page.dart';
 
 class HomePage extends NyStatefulWidget {
-  @override
-  final HomeController controller = HomeController();
-
   static const path = '/home-page';
 
   HomePage({Key? key}) : super(key: key);
@@ -20,129 +19,150 @@ class HomePage extends NyStatefulWidget {
 }
 
 class _HomePageState extends NyState<HomePage> {
-  bool _darkMode = false;
+  final HomeController controller = HomeController();
 
   @override
   init() async {
     super.init();
-
+    controller.getUser();
+    controller.user.listen((value) {
+      if (value != null) {
+        controller.getPengaturan();
+        controller.getSektorUnit();
+        // controller.getPernikahan();
+        // controller.getKelahiran();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello World".tr()),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: widget.controller.showAbout,
-            icon: Icon(Icons.info_outline),
-          ),
-        ],
-      ),
-      body: SafeAreaWidget(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Logo(),
-              Text(
-                getEnv("APP_NAME"),
-              ).displayMedium(context),
-              Text("Micro-framework for Flutter", textAlign: TextAlign.center)
-                  .titleMedium(context)
-                  .setColor(context, (color) => color.primaryAccent),
-              Text(
-                "Build something amazing 💡",
-              ).bodyMedium(context).alignCenter(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Divider(),
+      body: Container(
+        color: ThemeColor.get(context).background,
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx(() => Text((controller.user.value == null)
+                          ? ''
+                          : "Hi, ${controller.user.value!.namalengkap}")
+                      .headingMedium(context)
+                      .setStyle(TextStyle(fontWeight: FontWeight.w900))),
+                  SizedBox(height: 5),
+                  Text("Selamat datang!").bodyMedium(context),
+                  SizedBox(height: 19),
                   Container(
-                    height: 250,
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 30),
                     decoration: BoxDecoration(
-                        color: ThemeColor.get(context).surfaceBackground,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 9,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ]),
-                    child: Center(
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        children: [
-                          MaterialButton(
-                            child: Text(
-                              "documentation".tr().capitalize(),
-                            ).bodyLarge(context).setColor(
-                                context, (color) => color.surfaceContent),
-                            onPressed: widget.controller.onTapDocumentation,
-                          ),
-                          Divider(
-                            height: 0,
-                          ),
-                          MaterialButton(
-                            child: Text(
-                              "GitHub",
-                            ).bodyLarge(context).setColor(
-                                context, (color) => color.surfaceContent),
-                            onPressed: widget.controller.onTapGithub,
-                          ),
-                          Divider(
-                            height: 0,
-                          ),
-                          MaterialButton(
-                            child: Text(
-                              "changelog".tr().capitalize(),
-                            ).bodyLarge(context).setColor(
-                                context, (color) => color.surfaceContent),
-                            onPressed: widget.controller.onTapChangeLog,
-                          ),
-                          Divider(
-                            height: 0,
-                          ),
-                          MaterialButton(
-                            child: Text(
-                              "YouTube Channel".tr().capitalize(),
-                            ).bodyLarge(context).setColor(
-                                context, (color) => color.surfaceContent),
-                            onPressed: widget.controller.onTapYouTube,
-                          ),
-                        ],
-                      ),
+                      color: ThemeColor.get(context).primaryContent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'public/assets/app_icon/logo-alarm.png',
+                          width: 35,
+                        ),
+                        SizedBox(width: 19),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("JADWAL PELAYANAN")
+                                .setColor(
+                                    context,
+                                    (color) =>
+                                        ThemeColor.get(context).background)
+                                .setStyle(
+                                    TextStyle(fontWeight: FontWeight.w900)),
+                            Obx(() => Text(
+                                    controller.pengaturan.value?.namaJemaat ??
+                                        '')
+                                .setColor(
+                                    context,
+                                    (color) =>
+                                        ThemeColor.get(context).background)
+                                .setStyle(
+                                    TextStyle(fontWeight: FontWeight.w900))),
+                            SizedBox(height: 10),
+                            Obx(() => Text(
+                                    "Unit ${controller.sektorUnit.value?.unit ?? ''}, Sektor ${controller.sektorUnit.value?.sektor ?? ''}")
+                                .setColor(
+                                    context,
+                                    (color) =>
+                                        ThemeColor.get(context).background)),
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                  Text(
-                    "Framework Version: $nyloVersion",
-                  )
-                      .bodyMedium(context)
-                      .setColor(context, (color) => Colors.grey),
-                  Switch(
-                      value: _darkMode,
-                      onChanged: (value) {
-                        _darkMode = value;
-                        NyTheme.set(context,
-                            id: getEnv(_darkMode == true
-                                ? 'DARK_THEME_ID'
-                                : 'LIGHT_THEME_ID'));
-                        setState(() {});
-                      }),
-                  Text("${_darkMode == true ? "Dark" : "Light"} Mode"),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Pernikahan")
+                          .setStyle(TextStyle(fontWeight: FontWeight.w900)),
+                      GestureDetector(
+                          onTap: () {
+                            routeTo(PernikahanPage.path);
+                          },
+                          child: Text("Selengkapnya").setStyle(TextStyle(
+                              fontSize: 12,
+                              color: ThemeColor.get(context).primaryAccent))),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Obx(() => controller.pernikahanList.value != null
+                      ? Column(
+                          children: controller.pernikahanList.value!
+                              .map((item) => JadwalWidget(
+                                    imagePath:
+                                        'public/assets/images/ring-image.jpg',
+                                    title:
+                                        "${item.namaPria} & ${item.namaWanita}",
+                                    tanggal: DateTime.parse("${item.tanggal}"),
+                                    jam: "${item.jam}",
+                                    alamat: "${item.alamat}",
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox()),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Kelahiran")
+                          .setStyle(TextStyle(fontWeight: FontWeight.w900)),
+                      GestureDetector(
+                          onTap: () {
+                            routeTo(KelahiranPage.path);
+                          },
+                          child: Text("Selengkapnya").setStyle(TextStyle(
+                              fontSize: 12,
+                              color: ThemeColor.get(context).primaryAccent))),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Obx(() => (controller.kelahiranList.value != null)
+                      ? Column(
+                          children: controller.kelahiranList.value!
+                              .map((item) => JadwalWidget(
+                                    imagePath:
+                                        'public/assets/images/star_image.jpg',
+                                    title: '${item.nama}',
+                                    tanggal: DateTime.parse("${item.tanggal}"),
+                                    jam: "${item.jam}",
+                                    alamat: "${item.alamat}",
+                                  ))
+                              .toList(),
+                        )
+                      : SizedBox()),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

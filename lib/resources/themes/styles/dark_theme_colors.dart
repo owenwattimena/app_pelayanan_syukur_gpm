@@ -15,7 +15,7 @@ class DarkThemeColors implements ColorStyles {
   Color get primaryAccent => const Color(0xFF9999aa);
 
   Color get surfaceBackground => Colors.white70;
-  Color get surfaceContent => Colors.black;
+  Color get surfaceContent => const Color(0xFFCE730D);
 
   // app bar
   Color get appBarBackground => const Color(0xFF4b5e6d);
@@ -24,7 +24,7 @@ class DarkThemeColors implements ColorStyles {
   // buttons
   Color get buttonBackground => Colors.white60;
   Color get buttonPrimaryContent => const Color(0xFF232c33);
-
+  Color get buttonLogout => Colors.white60;
   // bottom tab bar
   Color get bottomTabBarBackground => const Color(0xFF232c33);
 
