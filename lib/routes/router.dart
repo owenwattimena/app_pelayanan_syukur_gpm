@@ -1,3 +1,4 @@
+import '/resources/pages/notifikasi_page.dart';
 import '/resources/pages/profile_page.dart';
 import '/resources/pages/akun_page.dart';
 import '/resources/pages/main_page.dart';
@@ -42,7 +43,10 @@ appRouter() => nyRoutes((router) {
   router.route(AkunPage.path, (context) => AkunPage());
 
   router.route(ProfilePage.path, (context) => ProfilePage());
+
+  router.route(NotifikasiPage.path, (context) => NotifikasiPage());
 });
+  
   
   
   

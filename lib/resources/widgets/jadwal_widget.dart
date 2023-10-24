@@ -9,14 +9,14 @@ class JadwalWidget extends StatelessWidget {
   final String imagePath;
   final String title;
   final DateTime tanggal;
-  final String jam;
+  final String usia;
   final String alamat;
   const JadwalWidget(
       {Key? key,
       required this.imagePath,
       required this.title,
       required this.tanggal,
-      required this.jam,
+      required this.usia,
       required this.alamat
       })
       : super(key: key);
@@ -47,11 +47,21 @@ class JadwalWidget extends StatelessWidget {
               Row(
                 children: [
                   Icon(
+                    Icons.update,
+                    size: 16.0,
+                  ),
+                  SizedBox(width: 5),
+                  Text("$usia Thn")
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(
                     Icons.calendar_today,
                     size: 16.0,
                   ),
                   SizedBox(width: 5),
-                  Text("${DateFormat('yyyy-MM-dd').format(tanggal)} - $jam")
+                  Text("${DateFormat('yyyy-MM-dd').format(tanggal)}")
                 ],
               ),
               ConstrainedBox(

@@ -222,6 +222,25 @@ class ApiService extends BaseApiService {
           dynamic data = response.data;
           return ApiReturnValue<Pengaturan>.fromJson(data,
               value: Pengaturan.fromJson(
+                  data['data'] ?? {'id':0, 'nama_jemaat' : ''})); // perlu diganti dengan data yg benar
+        },
+        handleFailure: (DioException e) {
+          dynamic data = e.response!.data;
+          return ApiReturnValue.fromJson(data);
+        });
+  }
+
+  // post notifikasi
+  Future<ApiReturnValue?> posNotifikasi(
+      {required String token, required Notifikasi notifikasi}) async {
+    return await network<ApiReturnValue>(
+        bearerToken: token,
+        request: (request) =>
+            request.post("/notifikasi", data: notifikasi.toJson()),
+        handleSuccess: (Response response) {
+          dynamic data = response.data;
+          return ApiReturnValue<Notifikasi>.fromJson(data,
+              value: Notifikasi.fromJson(
                   data['data'])); // perlu diganti dengan data yg benar
         },
         handleFailure: (DioException e) {
@@ -229,17 +248,20 @@ class ApiService extends BaseApiService {
           return ApiReturnValue.fromJson(data);
         });
   }
-  // post notifikasi
-  Future<ApiReturnValue?> postNotifikasi({required String token, required Notifikasi notifikasi}) async {
+
+  // get notifikasi
+  Future<ApiReturnValue?> fetchNotifikasiData(
+      {required String token, required int idUnit}) async {
     return await network<ApiReturnValue>(
         bearerToken: token,
-        request: (request) => request.post("/notifikasi",
-          data: notifikasi.toJson()),
+        request: (request) => request.get("/notifikasi/$idUnit"),
         handleSuccess: (Response response) {
           dynamic data = response.data;
-          return ApiReturnValue<Notifikasi>.fromJson(data,
-              value: Notifikasi.fromJson(
-                  data['data'])); // perlu diganti dengan data yg benar
+          List<Notifikasi> value = [];
+          for (var item in data['data']) {
+            value.add(Notifikasi.fromJson(item));
+          }
+          return ApiReturnValue<List<Notifikasi>>.fromJson(data, value: value);
         },
         handleFailure: (DioException e) {
           dynamic data = e.response!.data;

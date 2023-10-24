@@ -7,12 +7,15 @@ class Notifikasi extends Model {
   final String? judul;
   final String? isi;
   final int? idUnit;
-  Notifikasi({this.id, this.judul, this.isi, this.idUnit});
+  final String? createdAt;
+  Notifikasi({this.id, this.judul, this.isi, this.idUnit, this.createdAt});
   
   factory Notifikasi.fromJson(Map<String, dynamic> json) => Notifikasi(
     id: json['id'],
     judul: json['judul'],
     isi: json['isi'],
+    idUnit: int.tryParse(json['id_unit']),
+    createdAt: json['created_at']
   );
 
   Map<String, dynamic> toJson() => {

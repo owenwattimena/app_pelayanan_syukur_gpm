@@ -85,10 +85,10 @@ class _AkunPageState extends NyState<AkunPage> {
                               ],
                             ),
                           ),
-                          Divider(),
-                          Row(
-                            children: [Text('Notifikasi')],
-                          ),
+                          // Divider(),
+                          // Row(
+                          //   children: [Text('Notifikasi')],
+                          // ),
                           Divider(),
                           ElevatedButton(
                             onPressed: () async {

@@ -6,19 +6,19 @@ class Kelahiran extends Model {
   final int? id;
   final String? nama;
   final String? tanggal;
-  final String? jam;
+  final int? usia;
   final String? alamat;
   final int? idUnit;
 
-  Kelahiran({this.id, this.nama, this.tanggal, this.jam, this.alamat, this.idUnit});
+  Kelahiran({this.id, this.nama, this.tanggal, this.usia, this.alamat, this.idUnit});
   
   factory Kelahiran.fromJson(Map<String, dynamic> data) => Kelahiran(
-    id: data['id'],
-    nama: data['nama'],
-    tanggal: data['tanggal'],
-    jam: data['jam'],
+    id: int.tryParse(data['id']),
+    nama: data['nama_lengkap'],
+    tanggal: data['tanggal_lahir'],
+    usia: int.tryParse(data['usia']),
     alamat: data['alamat'],
-    idUnit: data['id_unit']
+    idUnit: int.tryParse(data['id_unit'])
   );
 
   toJson() {

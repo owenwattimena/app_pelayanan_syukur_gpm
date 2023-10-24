@@ -29,8 +29,8 @@ class _HomePageState extends NyState<HomePage> {
       if (value != null) {
         controller.getPengaturan();
         controller.getSektorUnit();
-        // controller.getPernikahan();
-        // controller.getKelahiran();
+        controller.getPernikahan();
+        controller.getKelahiran();
       }
     });
   }
@@ -122,9 +122,9 @@ class _HomePageState extends NyState<HomePage> {
                                     imagePath:
                                         'public/assets/images/ring-image.jpg',
                                     title:
-                                        "${item.namaPria} & ${item.namaWanita}",
+                                        "${item.namaPria} \n& ${item.namaWanita}",
                                     tanggal: DateTime.parse("${item.tanggal}"),
-                                    jam: "${item.jam}",
+                                    usia: "${item.usia}",
                                     alamat: "${item.alamat}",
                                   ))
                               .toList(),
@@ -154,7 +154,7 @@ class _HomePageState extends NyState<HomePage> {
                                         'public/assets/images/star_image.jpg',
                                     title: '${item.nama}',
                                     tanggal: DateTime.parse("${item.tanggal}"),
-                                    jam: "${item.jam}",
+                                    usia: "${item.usia}",
                                     alamat: "${item.alamat}",
                                   ))
                               .toList(),

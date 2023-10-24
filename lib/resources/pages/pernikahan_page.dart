@@ -83,9 +83,9 @@ class _PernikahanPageState extends NyState<PernikahanPage> {
                                   imagePath:
                                       'public/assets/images/ring-image.jpg',
                                   title:
-                                      "${item.namaPria} & ${item.namaWanita}",
+                                      "${item.namaPria} \n& ${item.namaWanita}",
                                   tanggal:DateTime.parse("${item.tanggal}"),
-                                  jam: "${item.jam}",
+                                  usia: "${item.usia}",
                                   alamat: "${item.alamat}",
                                 ))
                             .toList(),

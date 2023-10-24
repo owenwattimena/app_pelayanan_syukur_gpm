@@ -6,20 +6,20 @@ class Pernikahan extends Model {
   final int? id;
   final String? namaPria, namaWanita;
   final String? tanggal;
-  final String? jam;
+  final int? usia;
   final String? alamat;
   final int? idUnit;
 
-  Pernikahan({this.id, this.namaPria, this.namaWanita, this.tanggal, this.jam, this.alamat, this.idUnit});
+  Pernikahan({this.id, this.namaPria, this.namaWanita, this.tanggal, this.usia, this.alamat, this.idUnit});
   
   factory Pernikahan.fromJson(Map<String, dynamic> data) => Pernikahan(
-    id: data['id'],
-    namaPria: data['nama_pria'],
-    namaWanita: data['nama_wanita'],
-    tanggal: data['tanggal'],
-    jam: data['jam'],
+    id: int.tryParse(data['id']),
+    namaPria: data['suami'],
+    namaWanita: data['istri'],
+    tanggal: data['tanggal_menikah'],
+    usia: int.tryParse(data['usia']),
     alamat: data['alamat'],
-    idUnit: data['id_unit'],
+    idUnit: int.tryParse(data['id_unit']),
   );
 
   toJson() {

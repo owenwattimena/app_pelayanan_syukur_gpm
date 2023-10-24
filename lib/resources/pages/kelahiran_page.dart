@@ -84,7 +84,7 @@ class _KelahiranPageState extends NyState<KelahiranPage> {
                                       'public/assets/images/star_image.jpg',
                                   title: "${item.nama}",
                                   tanggal: DateTime.parse("${item.tanggal}"),
-                                  jam: "${item.jam}",
+                                  usia: "${item.usia}",
                                   alamat: "${item.alamat}",
                                 ))
                             .toList(),
